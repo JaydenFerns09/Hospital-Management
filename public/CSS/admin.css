@@ -227,6 +227,7 @@ body{
 }
 img{
 	height: 80px;
+  max-width: 100%;
 	border-radius: 50px;
 	border: 5px solid rgba(0, 255, 251,0.5);
 	-webkit-border-radius: 50px;
@@ -236,8 +237,8 @@ img{
 }
 .photo{
 	display: flex;
-	width: 100%;
-	justify-content: center;
+	width: 23rem;
+  margin: auto;
 	padding: 20px;
 }
 .social-icons{

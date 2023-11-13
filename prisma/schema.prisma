@@ -13,6 +13,7 @@ model Patient {
   Fname       String   @db.VarChar(255)
   Mname       String?  @db.VarChar(255)
   Lname       String?  @db.VarChar(255)
+  report      String?  @db.VarChar(255)
   dob         DateTime
   age         Int
   phone       BigInt   @unique
@@ -36,6 +37,7 @@ model Patient {
 
 model Payment {
   id              String  @id @default(uuid())
+  transaction_no  Int     @default(autoincrement())
   reason          String
   inital_cost     Float
   extra_cost      Float?
@@ -47,10 +49,12 @@ model Payment {
   patientid       String
 
   @@index([mode_of_payment], name: "idx_mode_of_payment")
+  @@index([transaction_no, patientid], name: "idx_transactions")
 }
 
 model Doctor {
   id              String            @id @default(uuid())
+  image           String            @db.VarChar(255)
   Fname           String            @db.VarChar(255)
   Mname           String?           @db.VarChar(255)
   Lname           String?           @db.VarChar(255)
@@ -61,13 +65,12 @@ model Doctor {
   age             Int
   phone           BigInt            @unique
   email           String            @unique @db.VarChar(255)
-  Blood_group     String            @db.VarChar(255)
+  blood_group     String            @db.VarChar(255)
   sex             String            @db.VarChar(10)
   room            String            @db.VarChar(255)
   salary          Float
   address         String            @db.VarChar(255)
   designation     String            @db.VarChar(255)
-  qualification   String            @db.VarChar(255)
   speciality      String            @db.VarChar(255)
   field           String            @db.VarChar(255)
   DoctorOnPatient DoctorOnPatient[]
@@ -78,17 +81,11 @@ model Doctor {
   @@index([phone], name: "unique_doctor_phone")
 }
 
-model Qualifications {
-  id        String @id @default(uuid())
-  doctor    Doctor @relation(fields: [doctorId], references: [id])
-  doctorId  String
-  degree    String @db.VarChar(255)
-  year      String @db.VarChar(255)
-  institute String @db.VarChar(255)
-}
+
 
 model Staff {
   id             String           @id @default(uuid())
+  image          String           @db.VarChar(255)
   Fname          String           @db.VarChar(255)
   Mname          String?          @db.VarChar(255)
   Lname          String?          @db.VarChar(255)
@@ -103,15 +100,27 @@ model Staff {
   sex            String           @db.VarChar(10)
   role           String           @db.VarChar(255)
   address        String           @db.VarChar(255)
-  Blood_group    String           @db.VarChar(255)
+  blood_group    String           @db.VarChar(255)
   designation    String           @db.VarChar(255)
   salary         Float
-  qualification  String           @db.VarChar(255)
   StaffOnPatient StaffOnPatient[]
+  Qualifications Qualifications[]
 
   @@index([username], name: "unique_staff_username")
   @@index([email], name: "unique_staff_email")
   @@index([phone], name: "unique_staff_phone")
+}
+
+model Qualifications {
+  id         String  @id @default(uuid())
+  doctor     Doctor? @relation(fields: [doctorId], references: [id])
+  doctorId   String?
+  staff      Staff?  @relation(fields: [staffId], references: [id])
+  staffId    String?
+  degree     String  @db.VarChar(255)
+  degree_img String  @db.VarChar(255)
+  year       String  @db.VarChar(255)
+  institute  String  @db.VarChar(255)
 }
 
 model Medication {
@@ -155,6 +164,7 @@ model StaffOnPatient {
 
 model Admin {
   id       String   @id @default(uuid())
+  image    String   @db.VarChar(255)
   Fname    String   @db.VarChar(255)
   Mname    String?  @db.VarChar(255)
   Lname    String?  @db.VarChar(255)
