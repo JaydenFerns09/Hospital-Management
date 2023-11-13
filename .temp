@@ -1,0 +1,146 @@
+app.get('/seed', async (req, res) => {
+
+  const patientResult = await prisma.patient.create({
+    data: {
+      Fname: "Michael",
+      Mname: "Alexander",
+      Lname: "Davis",
+      username: "michael_davis",
+      password: "securepassword",
+      dob: "1985-08-12T00:00:00Z",
+      age: 37,
+      phone: 8765432108,
+      email: "michael.davis@example.com",
+      room: "301",
+      sex: "Male",
+      Blood_group: "B+",
+      Allergies: "Pollen",
+    },
+  });
+  
+  const paymentResult = await prisma.payment.create({
+    data: {
+      reason: "Surgery Cost",
+      inital_cost: 5000.00,
+      extra_cost: 1500.00,
+      total_amount: 6500.00,
+      paid_amount: 5000.00,
+      due_amount: 1500.00,
+      mode_of_payment: "Cash",
+      patientid: patientResult.id,
+    },
+  });
+  
+  const doctorResult = await prisma.doctor.create({
+    data: {
+      Fname: "Dr. Jessica",
+      username: "dr_jessica",
+      password: "doctor456",
+      dob: "1982-05-20T00:00:00Z",
+      age: 40,
+      phone: 9876543215,
+      email: "dr.jessica@example.com",
+      room: "202",
+      sex: "Female",
+      Blood_group: "A+",
+      designation: "Orthopedic Surgeon",
+      salary: 120000.00,
+      qualification: "MS",
+      speciality: "Orthopedics",
+      field: "Surgery",
+    },
+  });
+  
+  const doctorOnPatientResult = await prisma.doctorOnPatient.create({
+    data: {
+      patientid: patientResult.id,
+      doctorid: doctorResult.id,
+    },
+  });
+  
+  const staffResult = await prisma.staff.create({
+    data: {
+      Fname: "Christopher",
+      Lname: "Hill",
+      username: "chris_hill",
+      password: "chris123",
+      dob: "1990-11-15T00:00:00Z",
+      age: 32,
+      phone: 8765432102,
+      email: "chris.hill@example.com",
+      room: "403",
+      sex: "Male",
+      Blood_group: "AB+",
+      designation: "Physiotherapist",
+      salary: 90000.00,
+      qualification: "DPT",
+    },
+  });
+  
+  const staffOnPatientResult = await prisma.staffOnPatient.create({
+    data: {
+      patientid: patientResult.id,
+      staffid: staffResult.id,
+    },
+  });
+  
+  const dependantResult = await prisma.dependant.create({
+    data: {
+      Fname: "Sophie",
+      Lname: "Davis",
+      dob: "2015-03-10T00:00:00Z",
+      age: 6,
+      phone: 1234567894,
+      email: "sophie.davis@example.com",
+      sex: "Female",
+      relation: "Daughter",
+      patientid: patientResult.id,
+    },
+  });
+  
+  const medicationResult = await prisma.medication.create({
+    data: {
+      name: "Ibuprofen",
+      dosage: "200mg",
+      frequency: "Three times a day",
+      patientid: patientResult.id,
+    },
+  });
+  
+});
+
+app.get("/del", async (req, res) => {
+  try {
+    // Delete all entries in the Dependant table
+    await prisma.dependant.deleteMany();
+  
+    // Delete all entries in the Medication table
+    await prisma.medication.deleteMany();
+  
+    // Delete all entries in the StaffOnPatient table
+    await prisma.staffOnPatient.deleteMany();
+  
+    // Delete all entries in the DoctorOnPatient table
+    await prisma.doctorOnPatient.deleteMany();
+  
+    // Delete all entries in the Payment table
+    await prisma.payment.deleteMany();
+  
+    // Delete all entries in the Medication table
+    await prisma.medication.deleteMany();
+  
+    // Delete all entries in the Patient table
+    await prisma.patient.deleteMany();
+  
+    // Delete all entries in the Doctor table
+    await prisma.doctor.deleteMany();
+  
+    // Delete all entries in the Staff table
+    await prisma.staff.deleteMany();
+  
+    console.log("All data deleted successfully.");
+  } catch (error) {
+    // Handle errors
+    console.error(error);
+  }
+})

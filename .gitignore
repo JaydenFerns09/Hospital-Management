@@ -1,0 +1,8 @@
+.env
+node_modules
+public/build
+resources/assets
+storage/*.key
+yarn-error.log
+yarn.lock
+composer.json

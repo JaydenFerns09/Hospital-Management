@@ -1,0 +1,417 @@
+html {
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+}
+
+/* Navbar */
+.navbar-top{
+background: rgba(0, 255, 251,0.25);;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(4.5px);
+-webkit-backdrop-filter: blur(4.5px);
+height: 5.5rem;
+margin-top: -0.5rem;
+}
+
+.nav-cont {
+  position: fixed;
+  top: 40rem;
+  left: 40rem;
+  z-index: 100;
+}
+
+/* Modal */
+
+.main-modal .modal {
+  overflow: hidden !important;
+}
+.main-modal .modal.fade:not(.in) .modal-dialog {
+  transform: translateX(100%);
+  -webkit-transform: translateX(100%);
+  -moz-transform: translateX(100%);
+  -ms-transform: translateX(100%);
+  -o-transform: translateX(100%);
+}
+
+.main-modal .modal.in .modal-dialog {
+  transform: translateX(0);
+}
+
+/* Linear gradient background */
+.main-modal .modal-content {
+  background: linear-gradient(to right, black, rgba(0, 255, 251,1));
+  border: none;
+  height: 43rem; /* Set height to 100% */
+  overflow: hidden;
+}
+
+/* Add styling for the close button */
+.close-btn {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  font-size: 1.5rem;
+  color: black;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  filter: invert(1);
+  -webkit-filter: invert(1);
+}
+
+/* Modal Content */
+.list {
+  position: relative;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  margin-left: 1rem;
+  line-height: 3rem;
+  font-size: 2rem;
+}
+
+.list h2 {
+  color: white;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+.list ul {
+  position: relative;
+}
+.list ul a li {
+  position: relative;
+  left: 0;
+  font-weight: 800;
+  color: white;
+  list-style: none;
+  margin: 4px 0;
+  border-left: 2px solid rgba(0, 255, 251,1);
+  transition: 0.5s;
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+.list ul a li:hover {
+  left: 10px;
+}
+.list ul a li span {
+  position: relative;
+  padding: 8px;
+  padding-left: 12px;
+  display: inline-block;
+  z-index: 1;
+  transition: 0.5s;
+}
+.list ul a li:hover span {
+  color: black;
+}
+.list ul a li:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to left, black, rgba(0, 255, 251,1));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: 0.5s;
+}
+.list ul a li:hover:before {
+  transform: scaleX(1);
+  -webkit-transform: scaleX(1);
+  -moz-transform: scaleX(1);
+  -ms-transform: scaleX(1);
+  -o-transform: scaleX(1);
+}
+
+
+/* Toggle */
+.btun {
+  width: 150px;
+  height: 50px;
+  border-radius: 5px;
+  border: none;
+  transition: all 0.5s ease-in-out;
+  font-size: 20px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(to left, black, rgb(3, 142, 139));
+  color: white;
+  scale: 0.8;
+}
+
+.btun:hover {
+  box-shadow: 0 0 20px 0px #2e2e2e3a;
+}
+
+.btun .icon {
+  position: absolute;
+  height: 40px;
+  width: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s;
+}
+
+.btun .text {
+  transform: translateX(55px);
+}
+
+.btun:hover .icon {
+  width: 175px;
+}
+
+.btun:hover .text {
+  transition: all 0.5s;
+  opacity: 0;
+}
+
+.btun:focus {
+  outline: none;
+}
+
+.btun:active .icon {
+  transform: scale(0.85);
+}
+
+
+
+/*  DO NOT DELETE ABOVE THIS COMMENT  */
+
+
+
+/* Profile Card */
+
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Slab:wght@100&display=swap');
+*{
+  
+  box-sizing:border-box;
+  font-family: arial;
+}
+body{
+display: flex;
+align-items: center;
+justify-content: center;
+height: 100vh;
+  background: url("Images/background.jpg");
+}
+.containers{
+align-items: center;
+justify-content: center;
+border: 1px solid #000;
+height: 43rem;
+min-height: 300px;
+  width: 90%;
+margin: 0;
+  margin: 14rem 5rem 9rem;
+/* max-width: 1000px; */
+padding: 40px;
+border-radius: 20px;
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background: rgba(138, 245, 243, 0.25);
+  z-index: 10;
+backdrop-filter: blur(25px);
+  border: 1px solid black;
+  scale: 0.9;
+  overflow-y: scroll;
+}
+
+.containers h4 {
+  font-size: 4rem;
+  color: aliceblue;
+  font-weight: 800;
+  font-family: 'Times New Roman', Times, serif;
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin-top: 10rem;
+}
+
+
+
+
+/* List */
+
+.docinfo {
+  width: 95%;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background: rgba(4, 4, 38, 0.6);
+  z-index: 10;
+  backdrop-filter: blur(25px);
+  border: 1px solid rgba(71, 251, 248, 0.5);
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  margin: auto;
+  text-align: center;
+  color: white;
+  height: 35rem;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  display: block;
+}
+
+.docinfo .head{
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 4rem;
+}
+
+.docinfo .tuple {
+  font-size: 1.1rem;
+  line-height: 3rem;
+}
+
+/* View More button */
+
+.bten {
+  font-size: 1.2rem;
+  padding: 1rem 1.8rem;
+  border: none;
+  outline: none;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  background-color: black;
+  color: rgb(234, 234, 234);
+  font-weight: 700;
+  transition: 0.6s;
+  box-shadow: 0px 0px 60px #1f4c65;
+}
+
+.bten:active {
+  scale: 0.92;
+}
+
+.bten:hover {
+  background: rgb(2,29,78);
+  background: linear-gradient(270deg, rgba(2, 29, 78, 0.681) 0%, rgba(31, 215, 232, 0.873) 60%);
+  color: rgb(4, 4, 38);
+}
+
+/* Profile card */
+.card-container {
+  display: flex;
+  width: 100%;
+  padding: 1rem;
+  height: 30rem;
+}
+
+.box {
+  flex: 1;
+  padding: 1rem;
+  height: 40rem;
+
+}
+
+.card-container .box h1 {
+  color: aliceblue;
+  font-size: 5rem;
+  font-weight: 600;
+  height: fit-content;
+  margin-top: 5rem;
+}
+
+.card-container .box h2 {
+  color: aliceblue;
+  font-size: 3rem;
+  font-weight: 600;
+  height: fit-content
+}
+
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+::selection{
+  color: #fff;
+  background: #1cc7d0;
+}
+.wrapper{
+  height: 40rem;
+  width: 80%;
+  position: relative;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+.wrapper .card{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  padding: 5px;
+  background: #fff;
+  border-radius: 10px;
+  transform: translateY(0deg);
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  box-shadow: 0px 10px 15px rgba(0,0,0,0.1);
+  transition: transform 0.7s cubic-bezier(0.4,0.2,0.2,1);
+}
+
+.wrapper .front-face, .wrapper .back-face {
+  width: 90%;
+  height: 90%
+}
+
+.wrapper:hover > .front-face{
+  transform: rotateY(-180deg);
+}
+.wrapper .card img{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.wrapper .back-face{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: column;
+  transform: rotateY(180deg);
+}
+.wrapper:hover > .back-face{
+  transform: rotateY(0deg);
+}
+.wrapper .back-face img{
+  height: 150px;
+  width: 150px;
+  padding: 5px;
+  border-radius: 50%;
+  background: linear-gradient(375deg, #1cc7d0, #2ede98);
+}
+.wrapper .back-face .info{
+  text-align: center;
+}
+.back-face .info .title{
+  font-size: 30px;
+  font-weight: 500;
+}
+.back-face ul{
+  display: flex;
+}
+.back-face ul a{
+  display: block;
+  height: 40px;
+  width: 40px;
+  color: #fff;
+  text-align: center;
+  margin: 0 5px;
+  line-height: 38px;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  background: linear-gradient(375deg, #1cc7d0, #2ede98);
+  transition: all 0.5s ease;
+}
+.back-face ul a:hover{
+  color: #1cc7d0;
+  border-color: #1cc7d0;
+  background: linear-gradient(375deg, transparent, transparent);
+}
+
+
