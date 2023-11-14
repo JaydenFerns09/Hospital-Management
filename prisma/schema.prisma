@@ -1,0 +1,206 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  url      = env("DATABASE_URL")
+  provider = "mysql"
+}
+
+model Patient {
+  id          String   @id @default(uuid())
+  image       String   @db.VarChar(255)
+  Fname       String   @db.VarChar(255)
+  Mname       String?  @db.VarChar(255)
+  Lname       String?  @db.VarChar(255)
+  report      String?  @db.VarChar(255)
+  admitTime   DateTime @default(now())
+  dob         String
+  age         Int
+  phone       BigInt   @unique
+  email       String   @unique @db.VarChar(255)
+  room        String   @db.VarChar(255)
+  sex         String   @db.VarChar(10)
+  blood_group String   @db.VarChar(255)
+  allergies   String   @db.VarChar(255)
+  treatment   String   @db.VarChar(255)
+  discharged  Boolean
+  reason      String @db.VarChar(255)
+
+  Payment    Payment[]
+  Medication Medication[]
+  Doctors    DoctorOnPatient[]
+  Staff      StaffOnPatient[]
+  Dependant  Dependant[]
+
+  @@index([phone], name: "unique_phone")
+  @@index([email], name: "unique_email")
+}
+
+model Payment {
+  id              String  @id @default(uuid())
+  transaction_no  Int     @default(autoincrement())
+  reason          String
+  inital_cost     Float
+  extra_cost      Float?
+  total_amount    Float
+  status Boolean
+  mode_of_payment String
+  patient         Patient @relation(fields: [patientid], references: [id])
+  patientid       String
+
+  @@index([mode_of_payment], name: "idx_mode_of_payment")
+  @@index([transaction_no, patientid], name: "idx_transactions")
+}
+
+model Doctor {
+  id              String            @id @default(uuid())
+  image           String            @db.VarChar(255)
+  Fname           String            @db.VarChar(255)
+  Mname           String?           @db.VarChar(255)
+  Lname           String?           @db.VarChar(255)
+  username        String            @unique @db.VarChar(255)
+  password        String            @db.VarChar(255)
+  StartDate       DateTime          @default(now())
+  dob             String
+  age             Int
+  phone           BigInt            @unique
+  email           String            @unique @db.VarChar(255)
+  blood_group     String            @db.VarChar(255)
+  sex             String            @db.VarChar(10)
+  room            String            @db.VarChar(255)
+  salary          Float
+  address         String            @db.VarChar(255)
+  designation     String            @db.VarChar(255)
+  speciality      String            @db.VarChar(255)
+  field           String            @db.VarChar(255)
+  employed        Boolean
+  facebook        String?            @db.VarChar(255)
+  instagram       String?           @db.VarChar(255)
+  twitter         String?            @db.VarChar(255)
+  linkedin        String?            @db.VarChar(255)
+  DoctorOnPatient DoctorOnPatient[]
+  Qualifications  Qualifications[]
+
+  @@index([username], name: "unique_doctor_username")
+  @@index([email], name: "unique_doctor_email")
+  @@index([phone], name: "unique_doctor_phone")
+}
+
+
+
+model Staff {
+  id             String           @id @default(uuid())
+  image          String           @db.VarChar(255)
+  Fname          String           @db.VarChar(255)
+  Mname          String?          @db.VarChar(255)
+  Lname          String?          @db.VarChar(255)
+  username       String           @unique @db.VarChar(255)
+  password       String           @db.VarChar(255)
+  start_date     DateTime         @default(now())
+  dob            String
+  age            Int
+  phone          BigInt           @unique
+  email          String           @unique @db.VarChar(255)
+  room           String           @db.VarChar(255)
+  sex            String           @db.VarChar(10)
+  role           String           @db.VarChar(255)
+  address        String           @db.VarChar(255)
+  blood_group    String           @db.VarChar(255)
+  designation    String           @db.VarChar(255)
+  salary         Float
+  employed Boolean
+  facebook        String?            @db.VarChar(255)
+  instagram       String?            @db.VarChar(255)
+  twitter         String?            @db.VarChar(255)
+  linkedin        String?            @db.VarChar(255)
+  StaffOnPatient StaffOnPatient[]
+  Qualifications Qualifications[]
+
+  @@index([username], name: "unique_staff_username")
+  @@index([email], name: "unique_staff_email")
+  @@index([phone], name: "unique_staff_phone")
+}
+
+model Qualifications {
+  id         String  @id @default(uuid())
+  doctor     Doctor? @relation(fields: [doctorId], references: [id])
+  doctorId   String?
+  staff      Staff?  @relation(fields: [staffId], references: [id])
+  staffId    String?
+  degree     String  @db.VarChar(255)
+  degree_img String  @db.VarChar(255)
+  year       String  @db.VarChar(255)
+  institute  String  @db.VarChar(255)
+}
+
+model Medication {
+  id        String  @id @default(uuid())
+  name      String  @db.VarChar(255)
+  dosage    String  @db.VarChar(255)
+  frequency String  @db.VarChar(255)
+  patient   Patient @relation(fields: [patientid], references: [id])
+  patientid String
+}
+
+model Dependant {
+  id        String   @id @default(uuid())
+  Fname     String   @db.VarChar(255)
+  Lname     String   @db.VarChar(255)
+  dob       DateTime
+  age       Int
+  phone     BigInt
+  email     String   @db.VarChar(255)
+  sex       String   @db.VarChar(10)
+  relation  String   @db.VarChar(255)
+  patient   Patient  @relation(fields: [patientid], references: [id])
+  patientid String
+}
+
+model DoctorOnPatient {
+  id        String  @id @default(uuid())
+  patient   Patient @relation(fields: [patientid], references: [id])
+  doctor    Doctor  @relation(fields: [doctorid], references: [id])
+  patientid String
+  doctorid  String
+}
+
+model StaffOnPatient {
+  id        String  @id @default(uuid())
+  patient   Patient @relation(fields: [patientid], references: [id])
+  staff     Staff   @relation(fields: [staffid], references: [id])
+  patientid String
+  staffid   String
+}
+
+model Admin {
+  id       String   @id @default(uuid())
+  image    String   @db.VarChar(255)
+  Fname    String   @db.VarChar(255)
+  Mname    String?  @db.VarChar(255)
+  Lname    String?  @db.VarChar(255)
+  username String   @unique @db.VarChar(255)
+  password String   @db.VarChar(255)
+  dob      String
+  age      Int
+  phone    BigInt   @unique
+  email    String   @unique @db.VarChar(255)
+  facebook        String            @db.VarChar(255)
+  instagram       String            @db.VarChar(255)
+  twitter         String            @db.VarChar(255)
+  linkedin        String            @db.VarChar(255)
+  github          String            @db.VarChar(255)
+}
+
+model ChangeLog {
+  id        String   @id @default(uuid())
+  action    String   @db.VarChar(255)
+  userID    String   @db.VarChar(255)
+  tableName String   @db.VarChar(255)
+  createdAt DateTime @default(now())
+}
+
+// To migrate schema run:
+// yarn prisma generate
+// yarn prisma migrate dev --name init --create-only
+// yarn prisma migrate deploy

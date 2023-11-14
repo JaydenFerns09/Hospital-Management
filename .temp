@@ -1,0 +1,221 @@
+app.get('/seed', async (req, res) => {
+  // Create dummy patients
+  const patient = await prisma.patient.create({
+    data: {
+      image: 'https://res.cloudinary.com/dw8pgouns/image/upload/Admin.jpg',
+      Fname: 'John',
+      Mname: 'Doe',
+      Lname: 'Smith',
+      report: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+      dob: '1990-05-15',
+      age: 32,
+      phone: 1234567890,
+      email: 'john.doe@example.com',
+      room: '101',
+      sex: 'Male',
+      blood_group: 'A+',
+      allergies: 'None',
+      treatment: 'Lorem ipsum treatment',
+      discharged: false,
+      reason: 'Bike Accident'
+    },
+  });
+
+  // Create dummy payments
+  const payment = await prisma.payment.create({
+    data: {
+      reason: 'Consultation',
+      inital_cost: 50.0,
+      extra_cost: 10.0,
+      total_amount: 60.0,
+      status: true,
+      mode_of_payment: 'Credit Card',
+      patientid: patient.id,
+    },
+  });
+
+  // Create dummy doctors
+  const doctor = await prisma.doctor.create({
+    data: {
+      image: 'https://res.cloudinary.com/dw8pgouns/image/upload/Admin.jpg',
+      Fname: 'Dr. Emily',
+      Mname: 'A.',
+      Lname: 'Johnson',
+      username: 'emily.johnson',
+      password: 'password123',
+      dob: '1980-01-20',
+      age: 42,
+      phone: 9876543210,
+      email: 'emily.johnson@example.com',
+      blood_group: 'B+',
+      sex: 'Female',
+      room: '201',
+      salary: 80000.0,
+      address: '123 Main Street',
+      designation: 'Senior Physician',
+      speciality: 'Cardiology',
+      field: 'Internal Medicine',
+      employed: true,
+      facebook: '',
+      instagram: '',
+      twitter: '',
+      linkedin: '',
+    },
+  });
+
+  // Create dummy staff
+  const staff = await prisma.staff.create({
+    data: {
+      image: 'https://res.cloudinary.com/dw8pgouns/image/upload/Admin.jpg',
+      Fname: 'Alice',
+      Mname: 'M.',
+      Lname: 'Johnson',
+      username: 'alice.johnson',
+      password: 'password456',
+      start_date: new Date(),
+      dob: '1992-08-10',
+      age: 30,
+      phone: 8765432109,
+      email: 'alice.johnson@example.com',
+      room: '301',
+      sex: 'Female',
+      role: 'Nurse',
+      address: '456 Oak Street',
+      blood_group: 'AB-',
+      designation: 'Registered Nurse',
+      salary: 60000.0,
+      employed: true,
+      facebook: '',
+      instagram: '',
+      twitter: '',
+      linkedin: ''
+    },
+  });
+
+  // Create dummy qualifications
+  const qualification = await prisma.qualifications.create({
+    data: {
+      doctorId: doctor.id,
+      degree: 'MD',
+      degree_img: 'https://res.cloudinary.com/dw8pgouns/image/upload/Admin.jpg',
+      year: '2010',
+      institute: 'Medical University',
+    },
+  });
+
+  // Create dummy medications
+  const medication = await prisma.medication.create({
+    data: {
+      name: 'Painkiller X',
+      dosage: '10mg',
+      frequency: 'Twice daily',
+      patientid: patient.id,
+    },
+  });
+
+  // Create dummy dependants
+  const dependant = await prisma.dependant.create({
+    data: {
+      Fname: 'Sarah',
+      Lname: 'Smith',
+      dob: new Date('2015-03-03'),
+      age: 8,
+      phone: 1112223333,
+      email: 'sarah.smith@example.com',
+      sex: 'Female',
+      relation: 'Child',
+      patientid: patient.id,
+    },
+  });
+
+  // Create dummy doctor-patient relationship
+  const doctorOnPatient = await prisma.doctorOnPatient.create({
+    data: {
+      patientid: patient.id,
+      doctorid: doctor.id,
+    },
+  });
+
+  // Create dummy staff-patient relationship
+  const staffOnPatient = await prisma.staffOnPatient.create({
+    data: {
+      patientid: patient.id,
+      staffid: staff.id,
+    },
+  });
+
+  const admin = await prisma.admin.create({
+    data: {
+      image: 'https://res.cloudinary.com/dw8pgouns/image/upload/Admin.jpg',
+      Fname: 'Jayden',
+      Lname: 'Fernandes',
+      username: 'jade2003',
+      password: 'admin2003',
+      dob: '2003-10-09',
+      age: 20,
+      phone: 9930086904,
+      email: 'jadefern09@gmail.com',
+      facebook: 'https://www.facebook.com/jade.ferns.1',
+      instagram: 'https://instagram.com/jaydxn.xo?igshid=Zmxrc3lnZWFvOGI3',
+      twitter: 'https://twitter.com/jadefern09',
+      linkedin: 'https://www.linkedin.com/in/jayden-fernandes-456ba8256',
+      github: 'https://github.com/JaydenFerns09'
+    }
+  })
+
+  res.json({ success: true });
+});
+
+
+app.get("/del", async (req, res) => {
+  try {
+    // Delete all entries in the Dependant table
+    await prisma.dependant.deleteMany();
+  
+    // Delete all entries in the Medication table
+    await prisma.medication.deleteMany();
+
+    // Delete all entries in the Qualifications table
+    await prisma.qualifications.deleteMany();
+  
+    // Delete all entries in the StaffOnPatient table
+    await prisma.staffOnPatient.deleteMany();
+  
+    // Delete all entries in the DoctorOnPatient table
+    await prisma.doctorOnPatient.deleteMany();
+  
+    // Delete all entries in the Payment table
+    await prisma.payment.deleteMany();
+  
+    // Delete all entries in the Medication table
+    await prisma.medication.deleteMany();
+  
+    // Delete all entries in the Patient table
+    await prisma.patient.deleteMany();
+  
+    // Delete all entries in the Doctor table
+    await prisma.doctor.deleteMany();
+  
+    // Delete all entries in the Staff table
+    await prisma.staff.deleteMany();
+    
+    // Delete all entries in the Admin table
+    await prisma.admin.deleteMany();
+
+    // Delete all entries in the ChangeLog table
+    await prisma.changeLog.deleteMany();
+
+    console.log("All data deleted successfully.");
+  } catch (error) {
+    // Handle errors
+    console.error(error);
+  }
+})
+
+
+// git checkout --orphan temp_branch
+// git add -A
+// git commit -m "Initial Commit"
+// git branch -D main
+// git branch -m main
+// git push --force origin main 
