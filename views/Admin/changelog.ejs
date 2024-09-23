@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Changelog - CareSphere</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="CSS/details.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <script src="https://kit.fontawesome.com/c39c442009.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar-top fixed w-full z-20 top-0 left-0">
+    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+        <a href="#" class="flex items-center">
+            <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 mr-3" alt="Logo">
+            <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">CareSphere</span>
+        </a>
+        <div class="profile"></div>
+        <button class="btun" data-bs-toggle="modal" data-bs-target="#mainModal">
+            <span class="icon">
+                <svg viewBox="0 0 175 80" width="40" height="40">
+                    <rect width="80" height="15" fill="#f0f0f0" rx="10"></rect>
+                    <rect y="30" width="80" height="15" fill="#f0f0f0" rx="10"></rect>
+                    <rect y="60" width="80" height="15" fill="#f0f0f0" rx="10"></rect>
+                </svg>
+            </span>
+            <span class="text">MENU</span>
+        </button>
+    </div>
+</nav>
+
+<!-- Main Modal -->
+<div class="main-modal">
+    <div class="modal fade" id="mainModal" data-bs-overflow="hidden" tabindex="-1" aria-labelledby="mainModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <% if (data.Lname == '' && data.Mname == ''){ %>
+                        <div class="profimg"><img src="<%= data.image %>" alt=""></div> <h1 class="modal-title fs-5" id="mainModalLabel"><%= data.Fname %></h1>
+                        <% }else if(data.Mname == ''){ %>
+                        <div class="profimg"><img src="<%= data.image %>" alt=""></div> <h1 class="modal-title fs-5" id="mainModalLabel"><%= data.Fname %> <%= data.Lname %></h1>
+                        <% }else{ %>
+                        <div class="profimg"><img src="<%= data.image %>" alt=""></div> <h1 class="modal-title fs-5" id="mainModalLabel"><%= data.Fname %> <%= data.Mname %> <%= data.Lname %></h1>
+                        <% } %>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <span class="material-symbols-outlined">
+                            close
+                        </span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="list">
+                        <ul>
+                            <a href="/admin?username=<%= data.username %>"><li><span>Home</span></li></a>
+                            <a href="/doctorinfo?username=<%= data.username %>"><li><span>Doctors</span></li></a>
+                            <a href="/staffinfo?username=<%= data.username %>"><li><span>Staff</span></li></a>
+                            <a href="/patientinfo?username=<%= data.username %>"><li><span>Patients</span></li></a>
+                            <a href="/changelog?username=<%= data.username %>"><li><span>ChangeLogs</span></li></a>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Profile Card -->
+<div class="containers">
+    <h4>Changelogs</h4>
+    <div class="row srow">
+        <div class="col-lg-6 search">
+            <div class="search-box">
+                <button class="btn-search"><i class="fas fa-search"></i></button>
+                <input id="searchbar" type="text" class="input-search" name="search" placeholder="Type to Search...">
+            </div>
+        </div>
+    </div>
+
+    <div class="docinfo">
+        <div class="row head">
+            <div class="col-lg-2">Action</div>
+            <div class="col-lg-2">Name</div>
+            <div class="col-lg-2">Position</div>
+            <div class="col-lg-2">Table Name</div>
+            <div class="col-lg-2">Time of Change</div>
+        </div>
+        <% for(let i= 0; i < val.length; i++ ){ %>
+            <div class="row tuple">
+                <div class="col-lg-2 docname"><%= val[i].action %></div>
+                <% for(let j = 0; j < admin.length; j++){ %>
+                    <% if(val[i].userID == admin[j].id){ %>
+                        <div class="col-lg-2 docname"><%= admin[j].Fname %> <%= admin[j].Mname %> <%= admin[j].Lname %></div>
+                        <div class="col-lg-2">Admin</div>
+                    <% } %>
+                <% } %>
+                <% for(let j = 0; j < doctor.length; j++){ %>
+                    <% if(val[i].userID == doctor[j].id){ %>
+                        <div class="col-lg-2 docname"><%= doctor[j].Fname %> <%= doctor[j].Mname %> <%= doctor[j].Lname %></div>
+                        <div class="col-lg-2">Doctor</div>
+                    <% } %>
+                <% } %>
+                <% for(let j = 0; j < staff.length; j++){ %>
+                    <% if(val[i].userID == staff[j].id){ %>
+                        <div class="col-lg-2 docname"><%= staff[j].Fname %> <%= staff[j].Mname %> <%= staff[j].Lname %></div>
+                        <div class="col-lg-2">Staff</div>
+                    <% } %>
+                <% } %>
+                <div class="col-lg-2"><%= val[i].tableName %></div>
+                <div class="col-lg-2"><%= val[i].createdAt %></div>
+            </div>
+        <% } %>
+    </div>
+
+</div>
+<script src="JS/details.js"></script>
+
+</body>
+</html>

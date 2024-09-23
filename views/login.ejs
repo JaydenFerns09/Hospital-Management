@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login - CareSphere</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="CSS/login.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
 <body>
     <form action="/login" method="post" class="min-h-screen py-6 flex flex-col justify-center sm:py-12">
@@ -39,12 +40,42 @@
         </div>
     </form>
 
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+    <% if (loginStatus.success === true) { %>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                showToast("<%= loginStatus.message %>", "<%= loginStatus.type %>");
+            });
+
+            function showToast(message, type) {
+                Toastify({
+                    text: message,
+                    duration: 3000,
+                    newWindow: true,
+                    close: true,
+                    gravity: "bottom", // top or bottom
+                    position: "right",
+                    offset: {
+                        x: 16,
+                        y: -16
+                    },
+                    backgroundColor: "black",
+                    className: "custom-toast-style",
+                    style: {
+                        padding: "3rem", // Add your desired padding
+                    }
+                }).showToast();
+            }
+        </script>
+    <% } %>
+
     <script>
         document.onreadystatechange = function() {
             if (document.readyState !== "complete") {
                 document.querySelector(
-                  ".btn").style.visibility = "hidden";
-                document.querySelector(
+                    ".btn").style.visibility = "hidden";
+                    document.querySelector(
                   ".loader").style.visibility = "visible";
             } else {
                 document.querySelector(
@@ -52,7 +83,7 @@
                 document.querySelector(
                   ".btn").style.visibility = "visible";
             }
-        };
+        }
     </script>
 </body>
 </html>

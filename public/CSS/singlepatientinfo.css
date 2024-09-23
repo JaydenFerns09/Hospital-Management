@@ -31,6 +31,13 @@
 }
 
 
+.darkened {
+  background-color: rgba(0, 0, 0, 0.4) !important;
+}
+
+.hide {
+  display: none !important;
+}
 
 html {
   height: 100%;
@@ -285,7 +292,7 @@ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 backdrop-filter: blur(25px);
   border: 1px solid black;
   scale: 0.9;
-  overflow-y: scroll;
+  overflow-y: hidden;
 }
 
 .containers h4 {
@@ -321,7 +328,7 @@ backdrop-filter: blur(25px);
   color: white;
   height: 35rem;
   overflow-x: hidden;
-  overflow-y: scroll;
+  overflow-y: hidden;
   display: block;
 }
 
@@ -456,8 +463,10 @@ backdrop-filter: blur(25px);
   margin-top: 1rem;
   text-align: left;
 }
+
 .back-face .info .title span {
   width: 3rem;
+  padding-top: 8px;
 }
 .back-face ul{
   display: flex;
@@ -489,6 +498,9 @@ backdrop-filter: blur(25px);
 /* Change form */
 
 
+
+
+
 .new-mod .modal-dialog {
   max-width: none !important;
   width: 50rem !important;
@@ -516,6 +528,7 @@ backdrop-filter: blur(25px);
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   margin-top: 0;
   color: #000; /* Black text */
+  overflow: hidden;
 }
 
 .name-cont {
@@ -784,7 +797,46 @@ textarea::placeholder {
   color: #424242; /* Darker placeholder color */
 }
 
-/* Back Button */
+
+.contact-modal .modal-content {
+  border-radius: 10% !important;
+  width: fit-content !important;
+  -webkit-border-radius: 10% !important;
+  -moz-border-radius: 10% !important;
+  -ms-border-radius: 10% !important;
+  -o-border-radius: 10% !important;
+  background-color: transparent;
+}
+
+.buttons{
+	display: inline-flex;
+	justify-content: left;
+	width: 100%;
+	float: left;
+	padding: 20px;
+}
+
+.contact, .download{
+	text-decoration: none;
+	text-align: center;
+	border-radius: 5px;
+	width: 150px;
+    cursor: pointer;
+    padding: 15px;
+    font-weight: 900;
+    color: #000;
+    cursor: pointer;
+    background: rgba(0, 255, 251,0.3);
+    border: 1px solid rgba(0, 255, 251,0.5);
+}
+.contact:hover, 
+.download:hover{
+	background: rgba(0, 255, 251,0.8);
+}
+
+.containers a {
+  text-decoration: none;
+}
 
 .bttun {
   display: flex;
@@ -823,3 +875,125 @@ textarea::placeholder {
   box-shadow: 9px 9px 33px rgba(0, 255, 251,0.3), -9px -9px 33px rgba(0, 255, 251,0.5);;
   transform: translateY(-2px);
  }
+
+ .qual-modal {
+  overflow: hidden;
+}
+
+.qual-modal .modal-title {
+  color: black;
+}
+
+.qual-modal .modal-content {
+  background: linear-gradient(to right, black, rgba(0, 255, 251,1));
+  border: none;
+  height: 43rem; /* Set height to 100% */
+  overflow: hidden;
+}
+
+.qual-modal .modal-body {
+  overflow-y: scroll;
+  padding-top: 0 !important;
+}
+
+.qual-modal .modal-title {
+  color: aliceblue;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.qual-modal h3 {
+  color: aliceblue;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.qual-modal p {
+  color: aliceblue;
+  font-size: 1rem;
+}
+ 
+/* Check Box  */
+
+.hamburger {
+  cursor: pointer;
+}
+
+.hamburger input {
+  display: none;
+}
+
+.hamburger svg {
+  /* The size of the SVG defines the overall size */
+  height: 3em;
+  /* Define the transition for transforming the SVG */
+  transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.line {
+  fill: none;
+  stroke: white;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 3;
+  /* Define the transition for transforming the Stroke */
+  transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
+              stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.line-top-bottom {
+  stroke-dasharray: 12 63;
+}
+
+.hamburger input:checked + svg {
+  transform: rotate(-45deg);
+}
+
+.hamburger input:checked + svg .line-top-bottom {
+  stroke-dasharray: 20 300;
+  stroke-dashoffset: -32.42;
+}
+
+.hamburger:hover {
+  backdrop-filter: brightness(130%);
+}
+
+.top {
+  margin-bottom: 1.5rem;
+}
+
+.doc {
+  color: aliceblue;
+  font-size: 1.5rem;
+  font-weight: 500;
+  background-color: transparent;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  height: 3rem;
+  align-items: center;
+}
+
+.staff {
+  color: aliceblue;
+  font-size: 1.5rem;
+  font-weight: 500;
+  background-color: transparent;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  height: 3rem;
+  align-items: center;
+}
+
+.person-name {
+  margin-left: 1rem;
+  color: aliceblue;
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.assignButton {
+  margin-top: 1.5rem;
+  width: 100%;
+}

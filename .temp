@@ -17,7 +17,8 @@ app.get('/seed', async (req, res) => {
       allergies: 'None',
       treatment: 'Lorem ipsum treatment',
       discharged: false,
-      reason: 'Bike Accident'
+      reason: 'Bike Accident',
+      patientType: 'Admitted'
     },
   });
 
@@ -37,7 +38,7 @@ app.get('/seed', async (req, res) => {
   // Create dummy doctors
   const doctor = await prisma.doctor.create({
     data: {
-      image: 'https://res.cloudinary.com/dw8pgouns/image/upload/Admin.jpg',
+      image: 'https://res.cloudinary.com/dw8pgouns/image/upload/doctor.jpg',
       Fname: 'Dr. Emily',
       Mname: 'A.',
       Lname: 'Johnson',
@@ -55,6 +56,8 @@ app.get('/seed', async (req, res) => {
       designation: 'Senior Physician',
       speciality: 'Cardiology',
       field: 'Internal Medicine',
+      experience: '5 Years',
+      quote: 'Your wellness is our priority',
       employed: true,
       facebook: '',
       instagram: '',
@@ -66,7 +69,7 @@ app.get('/seed', async (req, res) => {
   // Create dummy staff
   const staff = await prisma.staff.create({
     data: {
-      image: 'https://res.cloudinary.com/dw8pgouns/image/upload/Admin.jpg',
+      image: 'https://res.cloudinary.com/dw8pgouns/image/upload/staff.jpg',
       Fname: 'Alice',
       Mname: 'M.',
       Lname: 'Johnson',
@@ -82,6 +85,7 @@ app.get('/seed', async (req, res) => {
       role: 'Nurse',
       address: '456 Oak Street',
       blood_group: 'AB-',
+      experience: '5 Years',
       designation: 'Registered Nurse',
       salary: 60000.0,
       employed: true,
@@ -97,7 +101,7 @@ app.get('/seed', async (req, res) => {
     data: {
       doctorId: doctor.id,
       degree: 'MD',
-      degree_img: 'https://res.cloudinary.com/dw8pgouns/image/upload/Admin.jpg',
+      degree_img: 'https://res.cloudinary.com/dw8pgouns/image/upload/degree.jpg',
       year: '2010',
       institute: 'Medical University',
     },
@@ -118,7 +122,7 @@ app.get('/seed', async (req, res) => {
     data: {
       Fname: 'Sarah',
       Lname: 'Smith',
-      dob: new Date('2015-03-03'),
+      dob: '2012-03-10',
       age: 8,
       phone: 1112223333,
       email: 'sarah.smith@example.com',
@@ -218,4 +222,4 @@ app.get("/del", async (req, res) => {
 // git commit -m "Initial Commit"
 // git branch -D main
 // git branch -m main
-// git push --force origin main 
+// git push --force origin main

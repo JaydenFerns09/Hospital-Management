@@ -9,23 +9,25 @@ datasource db {
 
 model Patient {
   id          String   @id @default(uuid())
-  image       String   @db.VarChar(255)
+  image       String?   @db.VarChar(255)
   Fname       String   @db.VarChar(255)
   Mname       String?  @db.VarChar(255)
   Lname       String?  @db.VarChar(255)
-  report      String?  @db.VarChar(255)
   admitTime   DateTime @default(now())
   dob         String
-  age         Int
+  age         Int?
   phone       BigInt   @unique
   email       String   @unique @db.VarChar(255)
-  room        String   @db.VarChar(255)
-  sex         String   @db.VarChar(10)
   blood_group String   @db.VarChar(255)
+  address        String           @db.VarChar(255)
+  sex         String   @db.Char(1)
+  room        String   @db.VarChar(255)
+  report      String?  @db.VarChar(255)
   allergies   String   @db.VarChar(255)
+  discharged  Boolean  @default(false)
   treatment   String   @db.VarChar(255)
-  discharged  Boolean
   reason      String @db.VarChar(255)
+  patientType String   @db.VarChar(255)
 
   Payment    Payment[]
   Medication Medication[]
@@ -55,7 +57,7 @@ model Payment {
 
 model Doctor {
   id              String            @id @default(uuid())
-  image           String            @db.VarChar(255)
+  image           String?            @db.VarChar(255)
   Fname           String            @db.VarChar(255)
   Mname           String?           @db.VarChar(255)
   Lname           String?           @db.VarChar(255)
@@ -63,22 +65,24 @@ model Doctor {
   password        String            @db.VarChar(255)
   StartDate       DateTime          @default(now())
   dob             String
-  age             Int
+  age             Int?
   phone           BigInt            @unique
   email           String            @unique @db.VarChar(255)
   blood_group     String            @db.VarChar(255)
-  sex             String            @db.VarChar(10)
+  sex             String            @db.Char(1)
   room            String            @db.VarChar(255)
   salary          Float
   address         String            @db.VarChar(255)
   designation     String            @db.VarChar(255)
   speciality      String            @db.VarChar(255)
   field           String            @db.VarChar(255)
-  employed        Boolean
-  facebook        String?            @db.VarChar(255)
+  employed        Boolean            @default(true)
+  experience      String            @db.VarChar(255)
+  quote           String            @db.VarChar(255)
+  facebook        String?           @db.VarChar(255)
   instagram       String?           @db.VarChar(255)
-  twitter         String?            @db.VarChar(255)
-  linkedin        String?            @db.VarChar(255)
+  twitter         String?           @db.VarChar(255)
+  linkedin        String?           @db.VarChar(255)
   DoctorOnPatient DoctorOnPatient[]
   Qualifications  Qualifications[]
 
@@ -91,7 +95,7 @@ model Doctor {
 
 model Staff {
   id             String           @id @default(uuid())
-  image          String           @db.VarChar(255)
+  image          String?          @db.VarChar(255)
   Fname          String           @db.VarChar(255)
   Mname          String?          @db.VarChar(255)
   Lname          String?          @db.VarChar(255)
@@ -99,17 +103,18 @@ model Staff {
   password       String           @db.VarChar(255)
   start_date     DateTime         @default(now())
   dob            String
-  age            Int
+  age            Int?
   phone          BigInt           @unique
   email          String           @unique @db.VarChar(255)
-  room           String           @db.VarChar(255)
-  sex            String           @db.VarChar(10)
-  role           String           @db.VarChar(255)
-  address        String           @db.VarChar(255)
   blood_group    String           @db.VarChar(255)
-  designation    String           @db.VarChar(255)
+  sex            String           @db.Char(1)
+  address        String           @db.VarChar(255)
+  room           String           @db.VarChar(255)
   salary         Float
+  designation    String           @db.VarChar(255)
+  experience      String            @db.VarChar(255)
   employed Boolean
+  role           String           @db.VarChar(255)
   facebook        String?            @db.VarChar(255)
   instagram       String?            @db.VarChar(255)
   twitter         String?            @db.VarChar(255)
@@ -129,7 +134,7 @@ model Qualifications {
   staff      Staff?  @relation(fields: [staffId], references: [id])
   staffId    String?
   degree     String  @db.VarChar(255)
-  degree_img String  @db.VarChar(255)
+  degree_img String?  @db.VarChar(255)
   year       String  @db.VarChar(255)
   institute  String  @db.VarChar(255)
 }
@@ -146,36 +151,37 @@ model Medication {
 model Dependant {
   id        String   @id @default(uuid())
   Fname     String   @db.VarChar(255)
+  Mname     String   @db.VarChar(255)
   Lname     String   @db.VarChar(255)
-  dob       DateTime
-  age       Int
+  dob       String
+  age       Int?
   phone     BigInt
   email     String   @db.VarChar(255)
-  sex       String   @db.VarChar(10)
+  sex       String   @db.Char(1)
   relation  String   @db.VarChar(255)
   patient   Patient  @relation(fields: [patientid], references: [id])
   patientid String
 }
 
 model DoctorOnPatient {
-  id        String  @id @default(uuid())
   patient   Patient @relation(fields: [patientid], references: [id])
   doctor    Doctor  @relation(fields: [doctorid], references: [id])
   patientid String
   doctorid  String
+  @@id([doctorid,patientid])
 }
 
 model StaffOnPatient {
-  id        String  @id @default(uuid())
   patient   Patient @relation(fields: [patientid], references: [id])
   staff     Staff   @relation(fields: [staffid], references: [id])
   patientid String
   staffid   String
+  @@id([staffid,patientid])
 }
 
 model Admin {
   id       String   @id @default(uuid())
-  image    String   @db.VarChar(255)
+  image    String?   @db.VarChar(255)
   Fname    String   @db.VarChar(255)
   Mname    String?  @db.VarChar(255)
   Lname    String?  @db.VarChar(255)
@@ -190,6 +196,11 @@ model Admin {
   twitter         String            @db.VarChar(255)
   linkedin        String            @db.VarChar(255)
   github          String            @db.VarChar(255)
+}
+
+model Count {
+  id           String   @id @default(uuid())
+  count        Int
 }
 
 model ChangeLog {
