@@ -16,9 +16,9 @@
         <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 mr-3" alt="Logo">
         <span class="self-center text-2xl font-semibold whitespace-nowrap">CareSphere</span>
     </a>
-    <form action="/login" method="get">
+    <!-- <form action="/login" method="get">
         <button type="submit" class="button"> <p>Login</p></button>
-    </form>
+    </form> -->
     </div>
 </nav>
 
@@ -66,25 +66,68 @@
 
   <div class="wrapper">
     <h1 class="topic">Meet The Doctors</h1>
-    <% for(let i=0; i<val.length; i++){ %>
-      <div class="container topcont">
-        <div class="img-cont-up ext">
-          <img src="<%= val[i].image %>" alt="">
-        </div>
-        <div class="data-cont-up">
-          <% if (val[i].Lname != '' && val[i].Mname != ''){ %>
-            <h1><%= val[i].Fname %></h1>
-        <% }else if(val[i].Mname != ''){ %>
-            <h1><%= val[i].Fname %> <%= val[i].Lname %></h1>
-        <% }else{ %>
-            <h1><%= val[i].Fname %> <%= val[i].Mname %> <%= val[i].Lname %></h1>
-        <% } %>
-          <h2><strong><%= val[i].designation %></strong></h2>
-          <p><%= val[i].quote %> </p>
-        </div>
+    
+    <!-- Doctor 1 -->
+    <div class="container topcont">
+      <div class="img-cont-up ext">
+        <img src="https://res.cloudinary.com/dw8pgouns/image/upload/d1.jpg" alt="Doctor Image">
       </div>
-    <% } %>
+      <div class="data-cont-up">
+        <h1>Dr. Emma Taylor</h1>
+        <h2><strong>Lead Surgeon</strong></h2>
+        <p>"Saving lives, one patient at a time." </p>
+      </div>
+    </div>
+  
+    <!-- Doctor 2 -->
+    <div class="container topcont">
+      <div class="img-cont-up ext">
+        <img src="https://res.cloudinary.com/dw8pgouns/image/upload/d2.jpg" alt="Doctor Image">
+      </div>
+      <div class="data-cont-up">
+        <h1>Dr. Liam Patel</h1>
+        <h2><strong>Lead Surgeon</strong></h2>
+        <p>"Healing hands, caring hearts." </p>
+      </div>
+    </div>
+  
+    <!-- Doctor 3 -->
+    <div class="container topcont">
+      <div class="img-cont-up ext">
+        <img src="https://res.cloudinary.com/dw8pgouns/image/upload/d3.jpg" alt="Doctor Image">
+      </div>
+      <div class="data-cont-up">
+        <h1>Dr. Ava Lee</h1>
+        <h2><strong>Lead Surgeon</strong></h2>
+        <p>"Where compassion meets science." </p>
+      </div>
+    </div>
+  
+    <!-- Doctor 4 -->
+    <div class="container topcont">
+      <div class="img-cont-up ext">
+        <img src="https://res.cloudinary.com/dw8pgouns/image/upload/d4.jpg" alt="Doctor Image">
+      </div>
+      <div class="data-cont-up">
+        <h1>Dr. Ethan Kim</h1>
+        <h2><strong>Lead Surgeon</strong></h2>
+        <p>"From diagnosis to recovery, we're with you every step of the way." </p>
+      </div>
+    </div>
+  
+    <!-- Doctor 5 -->
+    <div class="container topcont">
+      <div class="img-cont-up ext">
+        <img src= "https://res.cloudinary.com/dw8pgouns/image/upload/d5.jpg" alt="Doctor Image">
+      </div>
+      <div class="data-cont-up">
+        <h1>Dr. Maya Singh</h1>
+        <h2><strong>Lead Surgeon</strong></h2>
+        <p>"Nurturing bodies, soothing souls."</p>
+      </div>
+    </div>
   </div>
+  
   
 <script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></script>
 </body>

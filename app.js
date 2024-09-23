@@ -61,11 +61,12 @@ const uploadImage = async (imagePath, customPublicId) => {
 };
 
 //use this function call to add images
-// imageInput(imgPath, customPublicId);
+// imageInput(iamgePath, customPublicId);
 
 //use this to get the link to the image
-// const publicId = 'Vedavyas_Dev';
+// const publicId = 'd1';
 // const imageUrl = cloudinaryUrl(cloudName, publicId, format);
+// console.log(imageUrl)
 
 async function getRandomNumber(min, max) {
   let randomNumber;
@@ -110,8 +111,9 @@ app.get("/developers", async (req, res) => {
 })
 
 app.get("/doctors", async (req, res) => {
-  var docinfo = await prisma.doctor.findMany({});
-  res.render("Home/doctors", {val: docinfo});
+  // var docinfo = await prisma.doctor.findMany({});
+  // res.render("Home/doctors", {val: docinfo});
+  res.render("Home/doctors");
 })
 
 app.get("/aboutus", async (req, res) => {
